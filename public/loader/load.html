@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumi CB - Loading Game</title>
+    <link rel="stylesheet" href="/public/games/style.css"> 
+    <link rel="stylesheet" href="/public/loader/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+</head>
+<body>
+
+    <canvas id="particles-canvas"></canvas>
+
+    <div id="main-layout-container">
+        <div id="game-frame-container">
+            <div id="initial-loading-text">Loading game...</div>
+            <div class="loader" id="game-loader"></div>
+            <h2 id="game-title-display"></h2> 
+            <iframe id="game-frame" src="" allowfullscreen sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-top-navigation"></iframe>
+        </div>
+
+        <div id="control-sidebar">
+            <div class="sidebar-top-icon">
+                <img id="game-preview-image" src="/public/images/placeholder.png" alt="Game Preview">
+            </div>
+
+            <div id="sidebar-controls">
+                <button id="back-to-games-btn" class="sidebar-button" title="Back to Games">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+                <button id="fullscreen-toggle-btn" class="sidebar-button" title="Toggle Fullscreen">
+                    <span class="material-symbols-outlined">fullscreen</span>
+                </button>
+                <button id="about-blank-btn" class="sidebar-button" title="Launch in Blank">
+                    <span class="material-symbols-outlined">launch</span>
+                </button>
+                <button id="favorite-btn" class="sidebar-button" title="Favorite">
+                    <span class="material-symbols-outlined">star</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/public/assets/games.js"></script>
+    <script src="/public/loader/script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,206 @@
+/* Base styles for the entire page */
+body {
+    background-color: #fce4ec; /* Soft pink background REVERTED */
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    color: #4a4a4a; /* Darker text for better contrast on pink */
+    overflow: hidden; /* Prevent scrollbars */
+}
+
+/* Particle Canvas for background effect - RE-ADDED */
+#particles-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1; /* Behind all content */
+    pointer-events: none;
+    background-color: #fce4ec; /* Ensure consistent background for canvas */
+}
+
+/* Main layout container (flexbox for left content + right sidebar) */
+#main-layout-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Left side: Game Frame Container */
+#game-frame-container {
+    flex-grow: 1; /* Takes up remaining space */
+    background-color: #fff; /* White background as per image */
+    border-radius: 15px; /* Rounded corners for the game area */
+    margin: 20px; /* Space from edges */
+    position: relative;
+    overflow: hidden; /* Hide anything overflowing the rounded corners */
+    display: flex; /* Flex context for centering loader/text */
+    flex-direction: column; /* Stack title/loader */
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    box-shadow: 0 5px 20px rgba(255, 182, 193, 0.6); /* Softer shadow for pink theme */
+}
+
+/* Game Frame (inside the container) */
+#game-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    background-color: #fff; /* Ensure iframe background is white if game doesn't fill */
+    /* Position absolutely to fill container and allow loader to be on top */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Below loader/text */
+}
+
+/* Game Title Display (inside game-frame-container, but hidden by iframe usually) */
+#game-title-display {
+    position: absolute; /* Position it over the frame content initially */
+    top: 20px;
+    left: 20px;
+    color: #333; /* Darker text */
+    font-size: 2em;
+    font-weight: bold;
+    z-index: 5; /* Above iframe, below loader */
+    display: none; /* Hidden by default, shown by JS if error/no game */
+}
+
+
+/* Right side: Control Sidebar */
+#control-sidebar {
+    width: 100px; /* Fixed width for the sidebar */
+    background-color: rgba(255, 192, 203, 0.9); /* Soft pink sidebar background */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;
+    padding: 20px 0; /* Vertical padding */
+    box-shadow: -5px 0 15px rgba(255, 182, 193, 0.6); /* Shadow on the left edge */
+    flex-shrink: 0; /* Prevent sidebar from shrinking */
+}
+
+/* Sidebar top icon (game preview image) */
+.sidebar-top-icon {
+    width: 50px; /* Smaller game preview image REVISED */
+    height: 50px; /* Smaller game preview image REVISED */
+    border-radius: 10px;
+    overflow: hidden; /* Ensures image stays within rounded corners */
+    background-color: rgba(255, 105, 180, 0.4); /* Pink background for the icon area */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: auto; /* Pushes buttons to the bottom */
+    box-shadow: inset 0 0 5px rgba(255, 105, 180, 0.3); /* Inner shadow */
+}
+.sidebar-top-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+/* Buttons container at the bottom of the sidebar */
+#sidebar-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between buttons */
+    margin-top: auto; /* Pushes buttons to the bottom */
+}
+
+/* Styling for sidebar buttons (icon-only, square) */
+.sidebar-button {
+    width: 50px; /* Square button */
+    height: 50px;
+    background-color: #ff69b4; /* Primary pink button color */
+    color: #fff; /* White icon color */
+    border: none;
+    border-radius: 8px; /* Slightly rounded corners */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(255, 105, 180, 0.5); /* Pink shadow */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    outline: none;
+}
+
+.sidebar-button:hover {
+    background-color: #ffa6d1; /* Lighter pink on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(255, 105, 180, 0.6);
+}
+
+.sidebar-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(255, 105, 180, 0.4);
+}
+
+.sidebar-button .material-symbols-outlined {
+    font-size: 28px; /* Icon size */
+    line-height: 1; /* Ensure vertical alignment */
+}
+
+
+/* Loading Spinner (remains similar, but styled for pink theme) */
+.loader {
+    border: 5px solid rgba(255, 255, 255, 0.3); /* Lighter grey for spinner */
+    border-top: 5px solid #ff69b4; /* Active pink for spinner */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    position: absolute; /* Positioned relative to game-frame-container */
+    z-index: 10; /* Above everything */
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Initial message before loader */
+#initial-loading-text {
+    color: #ff69b4; /* Pink text for initial message */
+    font-size: 1.8em;
+    text-align: center;
+    position: absolute; /* Positioned relative to game-frame-container */
+    z-index: 10;
+    font-weight: bold;
+}
+
+/* Hide game elements until loaded or error */
+#game-frame {
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.5s ease;
+}
+
+/* Media queries for responsiveness (adjust sidebar on small screens) */
+@media (max-width: 768px) {
+    #main-layout-container {
+        flex-direction: column; /* Stack content vertically */
+    }
+    #control-sidebar {
+        width: 100%; /* Full width */
+        height: auto; /* Auto height */
+        flex-direction: row; /* Buttons in a row */
+        justify-content: center;
+        padding: 10px 0;
+        box-shadow: 0 -5px 15px rgba(255, 182, 193, 0.6); /* Shadow on top edge */
+        order: 2; /* Put sidebar at the bottom */
+    }
+    .sidebar-top-icon {
+        display: none; /* Hide top icon on small screens */
+    }
+    #sidebar-controls {
+        flex-direction: row; /* Buttons in a row */
+        gap: 10px;
+        margin-top: 0;
+    }
+    #game-frame-container {
+        margin: 10px; /* Less margin on small screens */
+        height: calc(100vh - 100px); /* Adjust height for sidebar at bottom */
+        order: 1;
+    }
+}
