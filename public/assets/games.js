@@ -91,12 +91,7 @@ const gameData = [
         image: "/public/images/paper_io2.png",
         url: "/public/assets/hosted_games/paper_io_2/index.html"
     },
-    {
-        id: "retro_bowl_college",
-        name: "Retro Bowl College",
-        image: "/public/images/retro_bowl_college.webp",
-        url: "/public/assets/hosted_games/retro_bowl_college/index.html"
-    },
+    
     {
         id: "sandboxels",
         name: "Sandboxels",
@@ -136,4 +131,5 @@ const gameData = [
     // Add more games/apps here as needed.
     // Remember to put the game files in /public/assets/hosted_games/[your_game_id]/
     // and the preview image in /public/images/[your_game_id].jpg/.png
+
 ];
